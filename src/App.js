@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React, { createContext, useState } from 'react';
 import './App.css';
+import { Header, Routes } from './components';
+import * as store from 'store2';
+
+export const NotesContext = createContext();
 
 function App() {
+
+  function checkStore() {
+    if (store.has('notes')) return store('notes');
+    else return [];
+  }
+  
+  const [notes, setNotes] = useState(checkStore());
+  
+  // useEffect(() => {
+  //   console.log("App use effect is running")
+  //   let data = store('notes');
+  //   if (data) setNotes(data);
+  //   else store('notes', []);
+  // }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NotesContext.Provider
+        value={{
+          notes,
+          setNotes
+        }}
+      >
+        <Header />
+        <div className="app-container">
+          <Routes />
+        </div>
+      </NotesContext.Provider>
     </div>
   );
 }
