@@ -1,7 +1,7 @@
 # Ship's Log
 Pretty simple note taking app. This version just persists data using browser local storage.
 
-![Ship's Log Screenshot](/src/screenshot.png)
+![Ship's Log Screenshot](~/src/screenshot.png)
 
 ### Packages
 * [store2](https://github.com/nbubna/store) for local storage interaction
